@@ -1,0 +1,23 @@
+{
+  "name": "multi-auth",
+  "version": "0.0.0",
+  "description": "An authentication module that supports passwords, email auth, and 2-step auth",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "keywords": [
+    "auth",
+    "password",
+    "email",
+    "2-step",
+    "auth"
+  ],
+  "author": "James Brumond <james@jbrumond.me> (http://www.jbrumond.me)",
+  "license": "MIT",
+  "dependencies": {
+    "uuid-v4": "~0.1.0",
+    "promise-es6": "~0.1.0"
+  }
+}
