@@ -96,7 +96,7 @@ auth.define('checkPassword', function(userId, password, promise) {
 });
 
 // Define the confirm email routine
-auth.define('checkPassword', function(userId, promise) {
+auth.define('confirmEmail', function(userId, promise) {
 	User.findById(userId, function(err, user) {
 		if (err) {
 			return promise.reject(err);
