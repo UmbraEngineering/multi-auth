@@ -31,7 +31,9 @@ var Auth = require('multi-auth');
 // Create the auth controller
 var auth = new Auth();
 
+//
 // Define the process by which to send emails
+//
 auth.define('sendEmail', function(user, template, data, promise) {
 	var mail = mailer.sendEmail({
 		to: user.email,
@@ -44,7 +46,9 @@ auth.define('sendEmail', function(user, template, data, promise) {
 	});
 });
 
+//
 // Define the fetch user by ID routine
+//
 auth.define('fetchUserById', function(userId, promise) {
 	User.findById(userId, function(err, user) {
 		if (err) {
@@ -60,7 +64,9 @@ auth.define('fetchUserById', function(userId, promise) {
 	});
 });
 
+//
 // Define the fetch user by name routine
+//
 auth.define('fetchUserByName', function(userName, promise) {
 	var query = { };
 	
@@ -84,7 +90,9 @@ auth.define('fetchUserByName', function(userName, promise) {
 	});
 });
 
+//
 // Define the check password routine
+//
 auth.define('checkPassword', function(userId, password, promise) {
 	User.findById(userId, function(err, user) {
 		if (err) {
@@ -95,7 +103,9 @@ auth.define('checkPassword', function(userId, password, promise) {
 	});
 });
 
+//
 // Define the confirm email routine
+//
 auth.define('confirmEmail', function(userId, promise) {
 	User.findById(userId, function(err, user) {
 		if (err) {
@@ -117,7 +127,10 @@ Once you have defined all the basic actions for the module, you just have to set
 ```javascript
 var app = express();
 
-app.post('/auth/email-confirmation/:userId', function(req, res) {
+//
+// Start the email confirmation with a POST request
+//
+app.post('/auth/email-confirm/:userId', function(req, res) {
 	auth.confirmEmailStepOne(req.params.userId)
 		.then(function() {
 			res.send(200, {
@@ -126,12 +139,13 @@ app.post('/auth/email-confirmation/:userId', function(req, res) {
 		});
 });
 
-app.put('/auth/email-confirmation/:token', function(req, res) {
-	auth.confirmEmailStepOne(req.params.token)
+//
+// Finish confirming the email by clicking the link in the confirmation email
+//
+app.get('/auth/email-confirm/:token', function(req, res) {
+	auth.confirmEmailStepTwo(req.params.token)
 		.then(function() {
-			res.send(200, {
-				message: 'Email confirmation successful'
-			});
+			res.redirect('/auth/email-confirm/success');
 		});
 });
 ```
