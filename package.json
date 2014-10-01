@@ -1,6 +1,6 @@
 {
   "name": "multi-auth",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "An authentication module that supports passwords, email auth, and 2-step auth",
   "main": "lib/index.js",
   "scripts": {
